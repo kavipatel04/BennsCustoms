@@ -1,0 +1,52 @@
+<form action="/FormData" method="POST" id="myForm" name="myForm"> 
+
+    <span style="white-space: nowrap;">Submitter: </span>
+    <select id="select" name="_submitter_id">
+        <option value="<%= user.id %>"><%= user.name %></option>
+    </select><br>
+
+    <span style="white-space: nowrap;">Market: </span>
+    <select id="select" name="_market_id">
+        <% for(var a=0; a < myMarkets.length; a++) { %>
+            <option value="<%= myMarkets[a].id %>"><%= myMarkets[a].market_name %></option>
+    <% } %> </select><br>
+
+    <span style="white-space: nowrap;">Helper: </span>
+    <select id="select" name="_helper_id">
+        <% for(var a=0; a < myHelpers.length; a++) { %>
+            <option value="<%= myHelpers[a].id %>"><%= myHelpers[a].name %></option>
+    <% } %> </select><br>
+
+    <span style="white-space: nowrap;">Date for Report: </span>
+    <input type="date" id="report_for_date" name="report_for_date"><br>
+
+
+    
+<center>
+      <table>
+
+        <tr>
+            <th>Empanada Flavor</th>
+            <th>Fresh Empanadas</th>
+            <th>Thrown Empanadas</th>
+          </tr>
+        <% for(var a=0; a < myEmpanadas.length; a++) { %>
+        <tr>
+            <td><%= myEmpanadas[a].empanada_name %></td>
+            <td> <input type="number" name="_empanada_<%= myEmpanadas[a].empanada_name %>_fresh" /></td>
+            <td> <input type="number" name="_empanada_<%= myEmpanadas[a].empanada_name %>_thrown" /></td>
+         </tr>
+        <% } %> <br>
+
+    </table>
+</center>
+<br>
+
+    <span style="white-space: nowrap;">Cash Returned: $</span> <input type="number" step="0.01" name="_cash_in" />
+    <br>
+    <span style="white-space: nowrap;">Card Tips: $</span> <input type="number" step="0.01" name="_card_tips" />
+    
+
+    <input type="submit" value="Submit" /> 
+    
+</form> 

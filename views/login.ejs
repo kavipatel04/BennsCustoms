@@ -1,0 +1,73 @@
+<%- include('header',{
+    title:'Login'
+}); -%>
+<style>
+    body {
+  font-family: termina, sans-serif;
+  color: var(--text-color);
+  background: var(--bg-color);
+  transition: 0.3s ease-out;
+  overflow-x: hidden;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  color: rgb(0, 0, 0);
+}
+
+canvas#canvas {
+  display: block;
+  background: #000;
+}
+
+ul#navigation {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  right: 0;
+  text-align: center;
+  margin-right: 1.6rem;
+  font-size: 0.8rem;
+  -webkit-writing-mode: vertical-rl;
+      -ms-writing-mode: tb-rl;
+          writing-mode: vertical-rl;
+}
+
+ul#navigation > li {
+  display: inline-block;
+}
+
+h1 {
+  display: flex;
+  font-size: 4rem;
+  z-index: 2;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #000;
+}
+
+</style>
+
+
+
+<body>
+
+
+    
+<div class="container">
+    <h1>Login</h1>
+    <form action="" method="POST">
+        <label for="user_email">Email</label>
+        <input type="email" class="input" name="_email" autocomplete="off" id="user_email" placeholder="Enter your email">
+        <label for="user_pass">Password</label>
+        <input type="password" class="input" name="_password" id="user_pass" placeholder="Enter new password">
+        <% if(typeof error !== 'undefined'){ %>
+        <div class="err-msg"><%= error %></div><% } %>
+        <input type="submit" value="Login">
+        <div class="link"><a href="./signup">Sign Up</a></div>
+    </form>
+</div>
+</canvas>
+</body>
+<%- include('footer'); -%>

@@ -1,0 +1,78 @@
+<form action="/RetrievePackagerData" method="POST" id="getPackagerData" name="getPackagerData"> 
+
+    <span style="white-space: nowrap;">Market: </span>
+    <select id="select" name="_market_id">
+        <% for(var a=0; a < myMarkets.length; a++) { %>
+            <option value="<%= myMarkets[a].id %>"><%= myMarkets[a].market_name %></option>
+    <% } %> </select><br>
+
+    <span style="white-space: nowrap;">Date for Farmers Market: </span>
+    <input type="date" id="date" name="_fm_date"><br>
+    <span style="white-space: nowrap;">Active Farmers Markets on <%= session.date%></span>
+    <ul>
+    <% if(typeof session.otherActiveFM != 'undefined') { 
+        for(var k=0; k < session.otherActiveFM.length; k++) { %>
+        <li><%= myMarketsDict[session.otherActiveFM[k].market_id] %></li><% } } %>
+    </ul>
+    <input id="dataBtn" type="submit" value="Load Data" /> 
+
+</form>
+<br>
+
+<% if(typeof session.startPackerForm != 'undefined') { 
+    %> 
+<form action="/PackagerFormData" method="POST" id="packagerForm" name="packagerForm"> 
+    
+    <span style="white-space: nowrap;">Submitter: </span>
+    <select id="_submitter_id" name="_submitter_id">
+        <option value="<%= user.id %>"><%= user.name %></option>
+    </select><br>
+
+    <span style="white-space: nowrap;">Market: </span>
+    <select id="_packer_market_id" name="_packer_market_id">
+        <% for(var a=0; a < myMarkets.length; a++) { 
+            if(myMarketsDict[session.packerMarketID] == myMarkets[a].market_name){
+            %>
+            <option selected value="<%= myMarkets[a].id %>"><%= myMarkets[a].market_name %></option>
+             <% } else {  %>
+                <option value="<%= myMarkets[a].id %>"><%= myMarkets[a].market_name %></option>
+             <% }
+        }%>
+            </select><br>
+
+    <span style="white-space: nowrap;">Date for Farmers Market: </span>
+    <input type="date" id="_packer_fm_date" name="_packer_fm_date" value="<%=session.date%>"><br>
+
+
+    
+<center>
+      <table>
+
+        <tr>
+            <th>Flavor</th>
+            <th># Requested</th>
+            <th>Packaged</th>
+          </tr>
+        <% for(var a=0; a < myEmpanadas.length; a++) { %>
+            
+        <tr>
+            <td><%= myEmpanadas[a].empanada_name %></td>
+            <td><center><%= session.requestedEmpDict[myEmpanadas[a].id] %></center></td>
+            <td> <input type="number" name="_empanada_<%= myEmpanadas[a].empanada_name %>_packaged" /></td>
+         </tr>
+        <% } %> <br>
+
+    </table>
+</center>
+<br>
+
+    
+
+    <input type="submit" value="Submit" /> 
+    <script>
+        document.getElementById('_submitter_id').disabled = true;
+        document.getElementById('_packer_fm_date').disabled = true;
+        document.getElementById('_packer_market_id').disabled = true;
+    </script>
+</form> 
+<% } %>

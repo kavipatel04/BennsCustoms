@@ -1,0 +1,107 @@
+<%- include('header'); -%>
+<style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    /* Float four columns side by side */
+    .column {
+      float: left;
+      width: 75%;
+      padding-left: 25%;
+      padding-top: 30px;
+      padding-bottom: 30px;
+      padding-top: 10px;
+
+    }
+    
+    /* Remove extra left and right margins, due to padding */
+    .row {
+        margin: 0 auto;
+        max-width: 100%; /* This is what keeps the items in the center */
+        margin-bottom: 2%;
+
+    
+    }
+    
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    
+    /* Responsive columns */
+    @media screen and (max-width: 600px) {
+      .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+      }
+    }
+    
+    /* Style the counter cards */
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      padding: 30px;
+      text-align: center;
+      background-color: #f1f1f1;
+    }
+</style>
+
+<script>
+    /*
+    $('#myForm').submit(function(e){
+    e.preventDefault();
+    $.ajax({
+        url: '/FormData',
+        type: 'POST',
+        data:$('#myForm').serialize(),
+        success:function(){
+            process.exit(1)
+            // Whatever you want to do after the form is successfully submitted
+        }
+    });
+    
+});
+*/
+</script>
+
+<div class="container">
+    <div class="profile">
+        <div class="img">👦</div>
+        <h2><%= user.name %></h2>
+        <span><%= user.email %></span>
+        <a href="/logout">Log Out</a>
+    </div>
+</div>
+
+<% if( session.reportSuccessStatus != "no status"){ console.log(session.reportSuccessStatus); %>
+  <div class="row">
+    <div class="column">
+  <div class="success-msg"><%= session.reportSuccessStatus %></div></div></div></div><% } %>
+
+  <% if( session.reportFailedStatus != "no status"){ %>
+    <div class="row"><div class="column"><div class="err-msg"><%= session.reportFailedStatus %></div></div></div><% } %>
+
+<div class="row">
+    <div class="column">
+      <div class="card">
+        <%- include('submit_details_form'); -%><br>
+        <a href="./reports" ><button>View Your Past Reports</button></a>
+      </div>
+    </div>
+  </div>
+<br>
+  <div class="row">
+    <div class="column">
+      <div class="card">
+        <%- include('packager_form'); -%><br>
+      </div>
+    </div>
+  </div>
+<%- include('footer'); -%>

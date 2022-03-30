@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<%- include('header'); -%>
+<html>
+<head>
+    <style>
+        .inv {
+    display: none;
+    }
+    table, th, td {
+  border: 1px solid;
+}
+    </style>
+    <script src="/scripts/snippet-javascript-console.min.js?v=1"></script>
+</head>
+<body>
+    <!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8"/>
+        <title></title>
+    </head>
+    <body>
+        <select id="target">
+            <option value="">Select Date...</option>
+            <span style="white-space: nowrap;">Market: </span>
+        <% for(var a= myReports.length-1; a >= 0; a--) { %>
+            <option value="content_<%=a%>"><%= myReports[a].date_submitted %></option>
+    <% } %> 
+        <select>
+
+        <% for(var k=myReports.length-1; k >=0 ; k--) { %>
+                <div id="content_<%=k%>" class="inv">
+                <p>Report Submission Date: <%= myReports[k].date_submitted %></p>
+                <p>Report ID: <%= myReports[k].report_id %> </p>
+                <br>
+                <p>Submitter: <%=myPeople[myReports[k].submitter_id]%> </p>
+                <p>Helper: <%=myPeople[myReports[k].helper_id]%> </p>
+                <p>Market Name: <%=myMarkets[myReports[k].market_id] %> </p>
+                <p>Cash Returned: $<%=myReports[k].cash_in%> </p>
+                <p>Card Tips: $<%=myReports[k].card_tips%> </p>
+                
+                <table style="border: 1px solid;">
+                    <tr>
+                        <th>Empanada Flavor</th>
+                        <th>Empanada Fresh</th>
+                        <th>Empanada Thrown</th>
+                    </tr>
+                <%
+                for(var j=0; j < myMainReports[0].length; j++) {    %>
+                    <tr>
+                        <td><%=myEmpanadas[myMainReports[k][j].empanada_id] %></td>
+                        <td><%=myMainReports[k][j].empanada_quantity_fresh%></td>
+                        <td><%=myMainReports[k][j].empanada_quantity_thrown%></td>
+                    </tr>
+                <% 
+                    
+                } %> 
+                </table>
+                
+                </div>
+        <% } %> 
+    </body>
+</html>
+    <script type="text/javascript">
+        document
+  .getElementById('target')
+  .addEventListener('change', function () {
+    'use strict';
+    var vis = document.querySelector('.vis'),   
+      target = document.getElementById(this.value);
+    if (vis !== null) {
+      vis.className = 'inv';
+    }
+    if (target !== null ) {
+      target.className = 'vis';
+    }
+});
+    </script>
+</body>
+</html>

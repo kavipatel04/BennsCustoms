@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<%- include('header'); -%>
+<html>
+<head> 
+    <style>
+        .inv {
+    display: none;
+    }
+    table, th, td {
+  border: 1px solid;
+}
+    </style>
+    <script src="/scripts/snippet-javascript-console.min.js?v=1"></script>
+</head>
+<body>
+    <form action="/EmpanadaRequestFormData" method="POST" id="empanadaRequestForm" name="empanadaRequestForm"> 
+    <span style="white-space: nowrap;">Submitter: </span>
+    <select id="select" name="_submitter_id">
+        <option value="<%= user.id %>"><%= user.name %></option>
+    </select><br>
+
+    <span style="white-space: nowrap;">Market: </span>
+    <select id="select" name="_market_id">
+        <% for(var a=0; a < myMarkets.length; a++) { %>
+            <option value="<%= myMarkets[a].id %>"><%= myMarkets[a].market_name %></option>
+    <% } %> </select><br>
+
+    <span style="white-space: nowrap;">Date for Farmers Market: </span>
+    <input type="date" id="date" name="_fm_date"><br>
+
+
+    <center>
+        <table>
+
+            <tr>
+                <th>Empanada Flavor</th>
+                <th>Empanadas To Package</th>
+            </tr>
+            <% for(var a=0; a < myEmpanadas.length; a++) { %>
+            <tr>
+                <td><%= myEmpanadas[a].empanada_name %></td>
+                <td> <input type="number" name="_empanada_<%= myEmpanadas[a].empanada_name %>_to_package" /></td>
+            </tr>
+            <% } %> <br>
+
+        </table>
+    </center>
+    <br>
+    <input type="submit" value="Submit" /> 
+    </form>
+
+
+    
+</body>
+</html>
